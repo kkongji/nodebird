@@ -1,25 +1,30 @@
-import React from "react";
-import Link from "next/link";
-import Head from "next/head";
-import AppLayout from "../components/AppLayout";
+import React from 'react';
+import PostForm from '../components/PostForm';
+import PostCard from '../components/PostCard';
+
+const dummy = {
+  isLoggedIn: true,
+  imagePaths: [],
+  mainPosts: [{
+    User: {
+      id: 1,
+      nickname: "준영",
+    },
+    content: "ㅡ으으으으으",
+    img: ""
+  }]
+}
 
 const Home = () => {
   return (
-    <>
-      <Head>
-        <title>NodeBird</title>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.23.6/antd.css"
-        />
-      </Head>
-      <AppLayout>
-        <Link href="/about">
-          <a>about</a>
-        </Link>
-        <div>Hello, Next!</div>
-      </AppLayout>
-    </>
+    <div>
+      {dummy.isLoggedIn && <PostForm />}
+      {dummy.mainPosts.map(c => {
+        return (
+          <PostCard key={c} post={c} />
+        );
+      })}
+    </div>
   );
 };
 
